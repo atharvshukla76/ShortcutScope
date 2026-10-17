@@ -107,7 +107,7 @@ if is_dark:
     prog_bar_bg = "rgba(30, 41, 59, 0.85)"
     uploader_bg = "rgba(15, 23, 42, 0.60) !important"
     uploader_border = "1.8px dashed rgba(56, 189, 248, 0.45) !important"
-    uploader_small = "#94a3b8 !important"
+    uploader_small = "#cbd5e1 !important"
     btn_bg = "rgba(18, 30, 56, 0.85) !important"
     btn_color = "#f1f5f9 !important"
     btn_border = "1px solid rgba(255, 255, 255, 0.18) !important"
@@ -144,7 +144,7 @@ else:
     prog_bar_bg = "rgba(220, 230, 245, 0.7)"
     uploader_bg = "rgba(255, 255, 255, 0.45) !important"
     uploader_border = "1.8px dashed rgba(56, 120, 246, 0.45) !important"
-    uploader_small = "#8ca2bf !important"
+    uploader_small = "#1e293b !important"
     btn_bg = "#ffffff !important"
     btn_color = "#17243c !important"
     btn_border = "1px solid rgba(255, 255, 255, 0.95) !important"
@@ -434,10 +434,41 @@ div[data-testid="stFileUploader"] section button {{
     margin: 8px auto !important;
     width: auto !important;
 }}
-div[data-testid="stFileUploader"] section small {{
+div[data-testid="stFileUploader"] section button span,
+div[data-testid="stFileUploader"] section button p,
+div[data-testid="stFileUploader"] section button [class*="material"] {{
+    color: #ffffff !important;
+    background: transparent !important;
+}}
+
+/* ── Streamlit File Uploader Instructions: 200MB per file • JPG, PNG, WEBP ── */
+div[data-testid="stFileUploader"] [data-testid="stFileUploaderDropzoneInstructions"],
+div[data-testid="stFileUploader"] [data-testid="stFileUploaderDropzoneInstructions"] span,
+div[data-testid="stFileUploader"] [data-testid="stFileUploaderDropzoneInstructions"] small,
+div[data-testid="stFileUploader"] [data-testid="stFileUploaderDropzoneInstructions"] div,
+div[data-testid="stFileUploader"] [data-testid="stFileDropzoneInstructions"],
+div[data-testid="stFileUploader"] [data-testid="stFileDropzoneInstructions"] span,
+div[data-testid="stFileUploader"] [data-testid="stFileDropzoneInstructions"] small,
+div[data-testid="stFileUploader"] [data-testid="stFileDropzoneInstructions"] div,
+div[data-testid="stFileUploader"] section small,
+div[data-testid="stFileUploader"] section > div > div > span,
+div[data-testid="stFileUploader"] section > div > div > small {{
     color: {uploader_small};
-    font-size: 0.70rem !important;
+    opacity: 1 !important;
+    font-weight: 600 !important;
+    font-size: 0.78rem !important;
+    letter-spacing: 0.01em !important;
     margin-top: 6px !important;
+    text-shadow: none !important;
+}}
+
+/* Also theme-match any uploaded file status list or file metadata text */
+div[data-testid="stFileUploader"] section ul li,
+div[data-testid="stFileUploader"] section ul li span,
+div[data-testid="stFileUploader"] section ul li div,
+div[data-testid="stFileUploader"] [data-testid="stFileUploaderFileData"],
+div[data-testid="stFileUploader"] [data-testid="stFileUploaderFileData"] * {{
+    color: {uploader_small};
 }}
 
 /* ── Streamlit Action Buttons: Theme-Adaptive Liquid Glass ── */
