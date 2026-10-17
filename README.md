@@ -2,8 +2,10 @@
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B.svg)](https://streamlit.io/)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://shortcutscope-v5a6gafrglggun8rcas7ys.streamlit.app/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+> 🚀 **Live Web Application**: Explore the interactive model diagnosis platform directly in your browser: **[ShortcutScope on Streamlit Cloud](https://shortcutscope-v5a6gafrglggun8rcas7ys.streamlit.app/)**
 
 **ShortcutScope** is an empirical deep learning framework and interactive diagnostic platform designed to uncover, evaluate, and mitigate **shortcut learning** and **spurious feature reliance** in Convolutional Neural Networks (CNNs).
 
@@ -42,6 +44,8 @@ Standard Empirical Risk Minimization (ERM) yields models that achieve high overa
 
 ## 🌟 Interactive Streamlit Dashboard
 
+> 🌐 **Live Cloud Demo**: **[Launch ShortcutScope Interactive App](https://shortcutscope-v5a6gafrglggun8rcas7ys.streamlit.app/)** — test images and inspect Grad-CAM heatmaps directly in your browser without any local setup!
+
 ShortcutScope features a custom liquid-glass dashboard (`app.py`) for live diagnosis and interpretability:
 - **🧪 Live Test an Image**: Upload any bird image or test with sample birds to get simultaneous predictions from all three models.
 - **🔍 Grad-CAM Explainability**: Visual heatmaps revealing where each CNN focuses its attention (background vs. foreground bird anatomy).
@@ -53,13 +57,19 @@ ShortcutScope features a custom liquid-glass dashboard (`app.py`) for live diagn
 
 ## 🚀 Getting Started
 
-### 1. Clone Repository
+### 🌐 Option 1: Live Cloud Application (Instant Access)
+You can test the models and visualize Grad-CAM heatmaps right away via our deployed cloud app:
+- 👉 **[Access ShortcutScope on Streamlit Cloud](https://shortcutscope-v5a6gafrglggun8rcas7ys.streamlit.app/)**
+
+### 💻 Option 2: Run Locally
+
+#### 1. Clone Repository
 ```bash
 git clone https://github.com/atharvshukla76/ShortcutScope.git
 cd ShortcutScope
 ```
 
-### 2. Environment Setup
+#### 2. Environment Setup
 ```bash
 python -m venv env
 # Windows
@@ -70,7 +80,7 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
-### 3. Launch Interactive Dashboard
+#### 3. Launch Local Dashboard
 ```bash
 streamlit run app.py
 ```
