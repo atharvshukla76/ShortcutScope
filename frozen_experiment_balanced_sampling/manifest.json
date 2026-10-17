@@ -1,0 +1,18 @@
+{
+    "config.json": {
+        "size_bytes": 1121,
+        "sha256": "6978a0b9a78e77f44965dca77b27ba6c20adeb4e4c0746580518e8d62e37acf7"
+    },
+    "models\\balanced_sampling_cnn.pt": {
+        "size_bytes": 1573953,
+        "sha256": "63b776d03f1b9332215ee0a9ac91118328daaefa28b17fac39b629af71fc5de0"
+    },
+    "results\\balanced_sampling_history.csv": {
+        "size_bytes": 4518,
+        "sha256": "525dffaccfc5cc4db953edef20719e906a512c1a9bea69b8e52e4b7043f12c75"
+    },
+    "results\\balanced_sampling_test_metrics.json": {
+        "size_bytes": 399,
+        "sha256": "74fbf78d46e4db6669d28a3371d083618d5b0cd9c2c800b8b4a99f07de3902f6"
+    }
+}

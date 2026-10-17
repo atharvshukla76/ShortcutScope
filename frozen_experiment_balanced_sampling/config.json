@@ -1,0 +1,30 @@
+{
+    "project": "ShortcutScope",
+    "experiment": "Group-Balanced Sampling Mitigation",
+    "dataset": "Waterbirds (95% Spurious Correlation)",
+    "architecture": "ShortcutScopeCNN (4-Block ConvNet with BatchNorm & ReLU)",
+    "input_size": [
+        128,
+        128
+    ],
+    "batch_size": 32,
+    "sampling_method": "WeightedRandomSampler (Inverse Group Frequency - 25% per group)",
+    "loss_function": "Standard Cross-Entropy (unweighted loss)",
+    "optimizer": "AdamW",
+    "learning_rate": 0.0002,
+    "weight_decay": 0.01,
+    "dropout": 0.3,
+    "gradient_clipping": "max_norm=1.0",
+    "scheduler": "CosineAnnealingLR (eta_min=1e-5)",
+    "early_stopping_patience": 10,
+    "checkpoint_selection": "Best validation worst-group accuracy",
+    "train_augmentations": [
+        "RandomResizedCrop(128, scale=(0.7, 1.0))",
+        "RandomHorizontalFlip(p=0.5)",
+        "ColorJitter(brightness=0.3, contrast=0.3, saturation=0.3, hue=0.1)"
+    ],
+    "eval_transforms": [
+        "Resize(128, 128)",
+        "Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])"
+    ]
+}

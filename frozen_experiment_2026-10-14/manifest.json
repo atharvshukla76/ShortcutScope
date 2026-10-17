@@ -1,0 +1,34 @@
+{
+    "config.json": {
+        "size_bytes": 733,
+        "sha256": "3e0f5cafbd9dcc9941706ff54a332c4417b88d443e54c257d0c872a1dcb4336b"
+    },
+    "group_comparison.png": {
+        "size_bytes": 72850,
+        "sha256": "fa158ce4c9f4cbe8030e6c49c3db50a434e628a82527a4f71944c6cb7fb17ff4"
+    },
+    "models\\baseline_cnn.pt": {
+        "size_bytes": 1573629,
+        "sha256": "ecbab8f7d44f49b72501ad6e7be8a6336ccc46447d6876c56074f0412148afe6"
+    },
+    "models\\weighted_cnn.pt": {
+        "size_bytes": 1573629,
+        "sha256": "5f68f477ea2e696164ed63f29a08ac28f6efc83afd5d03bcfe993a10ba61015d"
+    },
+    "overall_comparison.png": {
+        "size_bytes": 51974,
+        "sha256": "55af0a6a8fdb73c81770080eca6f48020303942ccad8b3c05aee3856cb35764e"
+    },
+    "results\\baseline_history.csv": {
+        "size_bytes": 3540,
+        "sha256": "b2569535ab1a8cb6988a0a2f039b75b6a76f6efae707380e477dbb28a71410e1"
+    },
+    "results\\test_metrics.csv": {
+        "size_bytes": 260,
+        "sha256": "2cfe38fedf6932ca7ef3b172a8527d8815bebb2941cc6f4e74553f3a490419c5"
+    },
+    "results\\weighted_history.csv": {
+        "size_bytes": 2350,
+        "sha256": "513848810d8c96eb07f6b6647ccf0b1a6669b4c8c1e8382025f27614b6c0f1c6"
+    }
+}

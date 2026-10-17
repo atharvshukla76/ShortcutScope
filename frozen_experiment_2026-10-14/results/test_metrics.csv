@@ -1,0 +1,7 @@
+Metric,Baseline,Group-weighted
+Overall test accuracy,0.53262,0.547463
+Worst-group test accuracy,0.074766,0.393792
+Group 0 accuracy,0.932151,0.689579
+Group 1 accuracy,0.178714,0.393792
+Group 2 accuracy,0.074766,0.41433
+Group 3 accuracy,0.830218,0.721184

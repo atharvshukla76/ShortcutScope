@@ -1,0 +1,28 @@
+# Virtual Environments
+env/
+venv/
+.venv/
+ENV/
+
+# Dataset & Archives (Waterbirds dataset files)
+archive/
+archive.zip
+*.tar.gz
+*.zip
+
+# Python Bytecode & Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Jupyter Checkpoints
+.ipynb_checkpoints/
+
+# OS Specific Files
+.DS_Store
+Thumbs.db
+
+# IDE & Workspace Files
+.vscode/
+.idea/

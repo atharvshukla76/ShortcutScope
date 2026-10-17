@@ -1,0 +1,26 @@
+{
+    "project": "ShortcutScope",
+    "dataset": "Waterbirds",
+    "architecture": "ShortcutScopeCNN",
+    "training_method": "Train from scratch",
+    "input_size": [
+        128,
+        128
+    ],
+    "batch_size": 32,
+    "optimizer": "AdamW",
+    "learning_rate": 0.0002,
+    "weight_decay": 0.05,
+    "dropout": 0.5,
+    "early_stopping_patience": 8,
+    "maximum_epochs": 35,
+    "baseline_loss": "Standard cross-entropy",
+    "weighted_loss": "Group-weighted cross-entropy",
+    "scheduler": "CosineAnnealingLR",
+    "train_augmentations": [
+        "RandomResizedCrop",
+        "RandomHorizontalFlip",
+        "ColorJitter"
+    ],
+    "checkpoint_selection": "Best validation worst-group accuracy"
+}
