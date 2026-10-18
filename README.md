@@ -30,6 +30,73 @@ Standard Empirical Risk Minimization (ERM) yields models that achieve high overa
 
 ---
 
+## 📦 Dataset Information: Waterbirds Benchmark
+
+This project uses the official **Waterbirds** benchmark (`waterbird_complete95_forest2water2`), a canonical dataset specifically designed by [Sagawa et al. (ICLR 2020)](https://arxiv.org/abs/1911.08731) to investigate spurious correlations, shortcut learning, and worst-group generalization in computer vision.
+
+### 🖼️ Dataset Origin & Composition
+- **Foreground Objects**: Cropped bird images from the **[Caltech-UCSD Birds-200-2011 (CUB-200-2011)](https://www.vision.caltech.edu/datasets/cub_200_2011/)** dataset, categorized into two target classes ($y$):
+  - `y = 0`: **Landbird** (e.g., woodpeckers, sparrows, warblers, finches)
+  - `y = 1`: **Waterbird** (e.g., albatrosses, pelicans, gulls, ducks)
+- **Background Scenes**: Natural landscape images extracted from the **[Places365](http://places2.csail.mit.edu/)** scene recognition dataset:
+  - `place = 0`: **Land Background** (e.g., bamboo forest, forest, woods)
+  - `place = 1`: **Water Background** (e.g., ocean, lake)
+- **Synthetic Composition**: Bird cutouts are combined with land or water scenic backgrounds to synthetically create an artificial, controlled spurious co-occurrence.
+
+### 📊 Spurious Bias & Group Splits
+In the training partition, the dataset contains a **95% spurious correlation** between the bird class and the background environment:
+- 95% of landbirds appear on land backgrounds, and 95% of waterbirds appear on water backgrounds.
+- The 4 distinct evaluation groups ($g = 2y + \text{place}$) are:
+
+| Group ID | Target Label ($y$) | Background ($a$) | Type | Total Images | Train (`split=0`) | Val (`split=1`) | Test (`split=2`) |
+| :---: | :--- | :--- | :--- | :---: | :---: | :---: | :---: |
+| **Group 0** | Landbird (`0`) | Land (`0`) | Majority (Concordant) | 6,220 (52.8%) | 3,498 | 467 | 2,255 |
+| **Group 1** | Landbird (`0`) | Water (`1`) | Minority (Spurious Conflict) | 2,905 (24.6%) | 184 | 466 | 2,255 |
+| **Group 2** | Waterbird (`1`) | Land (`0`) | Minority (Spurious Conflict) | 831 (7.1%) | 56 | 133 | 642 |
+| **Group 3** | Waterbird (`1`) | Water (`1`) | Majority (Concordant) | 1,832 (15.5%) | 1,057 | 133 | 642 |
+| **Total** | | | | **11,788** | **4,795** | **1,199** | **5,794** |
+
+> ⚠️ **The Shortcut Vulnerability**: Because minority groups (Group 1 and Group 2) represent only a tiny fraction of the training data (56 and 184 samples, respectively), standard ERM models learn to classify the background rather than the bird anatomy, causing near-total failure on counterfactual test examples (e.g. 3.74% worst-group accuracy).
+
+### 📍 Where the Dataset is Used in This Project
+- **Model Training**: Used in [`train.ipynb`](train.ipynb) and [`balanced_sampling.ipynb`](balanced_sampling.ipynb) to train Baseline, Group-Weighted, and Group-Balanced CNNs.
+- **Metric Benchmarking**: Used in [`Evaluation.ipynb`](Evaluation.ipynb) and [`robust_analysis.ipynb`](robust_analysis.ipynb) to compute overall, per-group, and worst-group metrics.
+- **Explainability**: Used in [`gradcam_analysis.ipynb`](gradcam_analysis.ipynb) to extract Grad-CAM attention heatmaps on conflict test images.
+- **Interactive UI**: The Streamlit application ([`app.py`](app.py)) queries `metadata.csv` to load sample test birds and display true labels and group metadata.
+- **Local Workspace Path**:
+  ```
+  archive/
+  └── waterbird_complete95_forest2water2/
+      ├── metadata.csv
+      └── [001.Black_footed_Albatross ... 200.Common_Yellowthroat]/
+  ```
+
+### 📥 Where to Download the Dataset
+The raw dataset (~1.4 GB compressed) is excluded from this Git repository via `.gitignore` to maintain a lightweight repository. If you wish to reproduce training or run local batch experiments, you can download the dataset from any of the following sources:
+
+1. **Official Stanford Distribution (Recommended)**:
+   - **Direct Download Link**: [https://nlp.stanford.edu/data/dro/waterbird_complete95_forest2water2.tar.gz](https://nlp.stanford.edu/data/dro/waterbird_complete95_forest2water2.tar.gz)
+   - **Official Paper**: Sagawa, S., Koh, P. W., Hashimoto, T. B., & Liang, P. (ICLR 2020). *"Distributionally Robust Neural Networks for Group Shifts: On the Importance of Worst-Case Losses."* ([arXiv:1911.08731](https://arxiv.org/abs/1911.08731))
+   - **Official Repository**: [kohpangwei/group_DRO on GitHub](https://github.com/kohpangwei/group_DRO)
+2. **Stanford WILDS Benchmark**:
+   - Available as part of the [Stanford WILDS Project](https://wilds.stanford.edu/datasets/#waterbirds).
+3. **Kaggle Mirror**:
+   - Available under the [Waterbirds Dataset on Kaggle](https://www.kaggle.com/datasets) (search: `waterbird_complete95_forest2water2`).
+
+#### Quick Setup Commands
+```bash
+# Create archive directory
+mkdir -p archive
+
+# Download official tarball
+curl -O https://nlp.stanford.edu/data/dro/waterbird_complete95_forest2water2.tar.gz
+
+# Extract to archive directory
+tar -xvzf waterbird_complete95_forest2water2.tar.gz -C archive/
+```
+
+---
+
 ## 📊 Benchmark Test Results
 
 | Model Strategy | Overall Accuracy | Worst-Group Accuracy | Macro F1 | G0 (Land/Land) | G1 (Land/Water) | G2 (Water/Land) | G3 (Water/Water) |
@@ -104,6 +171,10 @@ ShortcutScope/
 │   ├── confusion_matrices.json
 │   ├── classification_reports.json
 │   └── *.png
+├── archive/                              # Local dataset directory (gitignored; see Dataset section)
+│   └── waterbird_complete95_forest2water2/
+│       ├── metadata.csv
+│       └── [bird class folders]/
 ├── frozen_experiment_2026-10-14/         # Experiment logs and checkpoints (Baseline & Weighted)
 ├── frozen_experiment_balanced_sampling/  # Experiment logs and checkpoints (Balanced Sampling)
 ├── train.ipynb                           # Baseline & Weighted model training pipeline
@@ -111,7 +182,8 @@ ShortcutScope/
 ├── Evaluation.ipynb                      # Comprehensive evaluation and comparative metrics
 ├── gradcam_analysis.ipynb                # Grad-CAM interpretability and feature extraction
 ├── robust_analysis.ipynb                 # Robustness and spurious correlation analysis
-└── dataset.ipynb                         # Waterbirds dataset exploration & splits
+├── dataset.ipynb                         # Waterbirds dataset exploration & splits
+└── DataVerify.ipynb                      # Dataset split integrity & image verification
 ```
 
 ---
